@@ -66,9 +66,11 @@ public class Stock {
 
     public void ExpirationDate(){
         for (Batch batch : this.batches){
-            if(7 >= (ChronoUnit.DAYS.between(LocalDate.now(), batch.getExpirationDate()))){
-                double newPrice = batch.getBuyPrice() * 0.8;
-                batch.setBuyPrice(newPrice);
+            if(batch.getExpirationDate() != null){
+                if(7 >= (ChronoUnit.DAYS.between(LocalDate.now(), batch.getExpirationDate()))){
+                    double newPrice = batch.getBuyPrice() * 0.8;
+                    batch.setBuyPrice(newPrice);
+                }
             }
         }
     }
