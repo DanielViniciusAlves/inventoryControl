@@ -1,4 +1,7 @@
 package org.tppe.exceptions;
 
-public class InvalidValueException {
+public class InvalidValueException extends Exception {
+    public InvalidValueException(String message){
+        super(message);
+    }
 }
