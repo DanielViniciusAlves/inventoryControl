@@ -1,9 +1,13 @@
 package org.tppe.services;
 
+import org.tppe.entities.Batch;
 import org.tppe.entities.Product;
 import org.tppe.entities.Stock;
 import org.tppe.exceptions.BlankDescriptionException;
 import org.tppe.exceptions.InvalidValueException;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 public class StockServices {
     private Stock stock;
@@ -29,14 +33,33 @@ public class StockServices {
         return null;
     }
 
-    public void receiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity){
+    public void receiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate){
         try {
-            this.stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
+            this.stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         } catch (BlankDescriptionException e) {
             throw new RuntimeException(e);
         } catch (InvalidValueException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public int getTotalProductsByName(String name){
+        Product product = this.findProductByName(name);
+        return product.getQuantity();
+    }
+
+    public int getTotalProductsByBarcode(String barcode){
+        Product product = this.findProductByBarcode(barcode);
+        return product.getQuantity();
+    }
+
+    public int getBatchTotal(int batchId){
+        for(Batch batch : this.stock.getBatches()){
+            if(batch.getBatchId() == batchId){
+                return batch.getBatchQuantity();
+            }
+        }
+        return 0;
     }
 
     public void sellProduct(){

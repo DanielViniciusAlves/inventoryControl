@@ -1,13 +1,19 @@
 package org.tppe;
 
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.tppe.entities.Batch;
 import org.tppe.entities.Product;
 import org.tppe.entities.Stock;
 import org.tppe.exceptions.BlankDescriptionException;
 import org.tppe.exceptions.InvalidValueException;
 import org.tppe.services.StockServices;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,73 +22,100 @@ public class TestStock {
 
     private static Stock stock;
 
-    @BeforeAll
-    public static void init(){
+    @BeforeEach
+    public void init(){
         stock = new Stock();
     }
 
     @ParameterizedTest
     @CsvSource({
-            "ProductA, 123, 10.0, 20.0, 100",
+            "ProductA, 123, 10.0, 20.0, 100, 2023-12-31",
     })
-    public void testFindProductByName(String name, String barcode, double buyPrice, double sellPrice, int quantity) {
+    public void testAddProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
         assertDoesNotThrow(() -> {
-            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
+            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
 
-        Product foundProduct = findProduct(barcode);
-        assertEquals(name, foundProduct.getName());
+        Product addedProduct = stock.getProducts().getFirst();
+        assertEquals(name, addedProduct.getName());
+
+        Batch addedBatch = stock.getBatches().getFirst();
+        assertEquals(name, addedBatch.getProductName());
 
         assertDoesNotThrow(() -> {
-            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
+            stock.addProduct(name, barcode, buyPrice, sellPrice, 50, expirationDate);
         });
-        foundProduct = findProduct(barcode);
-        assertEquals(quantity + 100, foundProduct.getQuantity());
+
+        addedProduct = stock.getProducts().getFirst();
+        addedBatch = stock.getBatches().getFirst();
+
+        assertEquals(quantity + 50, addedProduct.getQuantity());
+        assertEquals(quantity, addedBatch.getBatchQuantity());
     }
 
     @ParameterizedTest
     @CsvSource({
-            "ProductA, 123, 10.0, 20.0, 100",
+            "ProductB, 123, 10.0, 20.0, 100, 2023-12-31",
     })
-    public void testRemoveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity){
+    public void testRemoveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate){
         assertDoesNotThrow(() -> {
-            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
+            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
-        Product foundProduct = findProduct(barcode);
-        stock.removeProduct(foundProduct, 10);
+        Product addedProduct = stock.getProducts().getFirst();
+        stock.removeProduct(addedProduct, 10, 0);
 
-        assertEquals(quantity - 10, foundProduct.getQuantity());
+        Batch addedBatch = stock.getBatches().getFirst();
+
+        assertEquals(quantity - 10, addedProduct.getQuantity());
+        assertEquals(quantity - 10, addedBatch.getBatchQuantity());
     }
 
     @ParameterizedTest
     @CsvSource({
-            "ProductA, 456, 0, 20.0, 100",
-            "ProductB, 123, 15.0, -1, 150",
-            "ProductC, 123, 15.0, 20.0, -10"
+            "ProductC, 456, 0, 20.0, 100, 2023-12-31",
+            "ProductD, 123, 15.0, -1, 150, 2023-12-31",
+            "ProductF, 123, 15.0, 20.0, -10, 2023-12-31"
     })
-    public void testInvalidInputValueReceiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity) {
+    public void testInvalidInputValueReceiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
         assertThrows(InvalidValueException.class, () -> {
-            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
+            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
     }
 
     @ParameterizedTest
     @CsvSource({
-            "    , 456, 20.0, 20.0, 100",
-            "ProductB,  , 15.0, 10.0, 150",
+            "    , 456, 20.0, 20.0, 100, 2023-12-31",
+            "ProductG,  , 15.0, 10.0, 150, 2023-12-31",
     })
-    public void testBlankDescriptionReceiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity) {
+    public void testBlankDescriptionReceiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
         assertThrows(BlankDescriptionException.class, () -> {
-            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
+            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
     }
 
-    private Product findProduct(String barcode){
-        for (Product product : this.stock.getProducts()){
-            if(product.getBarcode() == barcode){
-                return product;
-            }
-        }
-        return null;
+    @ParameterizedTest
+    @CsvSource({
+            "ProductA, 123, 10.0, 20.0, 100, 2023-11-27",
+    })
+    public void testExpirationDateExpired(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
+        assertDoesNotThrow(() -> {
+            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
+        });
+
+        Batch addedBatch = stock.getBatches().getFirst();
+        assertEquals(buyPrice * 0.8, addedBatch.getBuyPrice());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "ProductA, 123, 10.0, 20.0, 100",
+    })
+    public void testExpirationDate(String name, String barcode, double buyPrice, double sellPrice, int quantity) {
+        assertDoesNotThrow(() -> {
+            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, LocalDate.now().plusDays(31));
+        });
+
+        Batch addedBatch = stock.getBatches().getFirst();
+        assertEquals(buyPrice, addedBatch.getBuyPrice());
     }
 }

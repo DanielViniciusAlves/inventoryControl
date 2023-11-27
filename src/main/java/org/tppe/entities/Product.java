@@ -6,15 +6,11 @@ import org.tppe.exceptions.InvalidValueException;
 public class Product {
     private String name;
     private String barcode;
-    private double buyPrice;
-    private double sellPrice;
     private int quantity;
 
-    public Product(String name, String barcode, double buyPrice, double sellPrice, int quantity) {
+    public Product(String name, String barcode, int quantity) {
         this.name = name;
         this.barcode = barcode;
-        this.buyPrice = buyPrice;
-        this.sellPrice = sellPrice;
         this.quantity = quantity;
     }
 
@@ -32,22 +28,6 @@ public class Product {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
-    }
-
-    public double getBuyPrice() {
-        return buyPrice;
-    }
-
-    public void setBuyPrice(double buyPrice) {
-        this.buyPrice = buyPrice;
-    }
-
-    public double getSellPrice() {
-        return sellPrice;
-    }
-
-    public void setSellPrice(double sellPrice) {
-        this.sellPrice = sellPrice;
     }
 
     public int getQuantity() {

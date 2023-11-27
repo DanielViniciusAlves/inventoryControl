@@ -3,21 +3,31 @@ package org.tppe.entities;
 import org.tppe.exceptions.BlankDescriptionException;
 import org.tppe.exceptions.InvalidValueException;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Stock {
     private List<Product> products;
+    private List<Batch> batches;
+    private int batchId;
 
     public Stock(){
+        this.batches = new ArrayList<>();
         this.products = new ArrayList<>();
+        this.batchId = 0;
     }
 
     public List<Product> getProducts() {
         return products;
     }
 
-    public void addProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity) throws BlankDescriptionException, InvalidValueException {
+    public List<Batch> getBatches() {
+        return batches;
+    }
+
+    public void addProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) throws BlankDescriptionException, InvalidValueException {
         if(name == null || barcode == null || name.isBlank() || barcode.isBlank()){
             throw new BlankDescriptionException("DescricaoEmBrancoException");
         }
@@ -33,15 +43,34 @@ public class Stock {
             }
         }
         if(!productExist){
-            Product product = new Product(name, barcode, buyPrice, sellPrice, quantity);
+            Product product = new Product(name, barcode, quantity);
             this.products.add(product);
         }
+        Batch batch = new Batch(this.batchId, name, barcode, buyPrice, sellPrice, quantity, expirationDate);
+        this.batches.add(batch);
+        this.batchId++;
+        this.checkBatchDateExpiration();
     }
 
-    public void removeProduct(Product product, int quantity){
+    public void removeProduct(Product product, int quantity, int batchId){
         for (Product tempProduct : this.products){
             if(product.getName() == tempProduct.getName()){
                 product.setQuantity(product.getQuantity() - quantity);
+            }
+        }
+        for (Batch tempBatch : this.batches){
+            if(tempBatch.getBatchId() == batchId){
+                tempBatch.setBatchQuantity(tempBatch.getBatchQuantity() - quantity);
+            }
+        }
+        this.checkBatchDateExpiration();
+    }
+
+    private void checkBatchDateExpiration(){
+        for(Batch tempBatch : this.batches){
+            if(30 >= (ChronoUnit.DAYS.between(LocalDate.now(), tempBatch.getExpirationDate()))){
+                tempBatch.setBuyPrice(tempBatch.getBuyPrice() * 0.8);
+                System.out.println("Produto perto da data de validade, preço reduzido.");
             }
         }
     }
