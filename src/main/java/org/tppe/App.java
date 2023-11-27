@@ -8,13 +8,7 @@ import org.tppe.services.StockServices;
 public class App {
     public static void main(String[] args) {
         StockServices stockServices = new StockServices();
-        try {
-            stockServices.receiveProduct("Te43st", "12345-bh1", 12.3, 15.3, 10);
-        } catch (BlankDescriptionException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidValueException e) {
-            throw new RuntimeException(e);
-        }
+        stockServices.receiveProduct("Te43st", "12345-bh1", 12.3, 15.3, 10);
 
         Product product = stockServices.findProductByName("Test");
         System.out.println(product.getName());

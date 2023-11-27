@@ -29,15 +29,14 @@ public class StockServices {
         return null;
     }
 
-    public void receiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity) throws BlankDescriptionException, InvalidValueException {
-        if(name == null || barcode == null || name.isBlank() || barcode.isBlank()){
-            throw new BlankDescriptionException("DescricaoEmBrancoException");
+    public void receiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity){
+        try {
+            this.stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
+        } catch (BlankDescriptionException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidValueException e) {
+            throw new RuntimeException(e);
         }
-        if(buyPrice <= 0 || sellPrice <= 0 || quantity <= 0){
-            throw new InvalidValueException("ValorInvalidoException");
-        }
-
-        this.stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
     }
 
     public void sellProduct(){

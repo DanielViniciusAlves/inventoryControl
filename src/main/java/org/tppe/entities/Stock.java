@@ -17,7 +17,14 @@ public class Stock {
         return products;
     }
 
-    public void addProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity){
+    public void addProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity) throws BlankDescriptionException, InvalidValueException {
+        if(name == null || barcode == null || name.isBlank() || barcode.isBlank()){
+            throw new BlankDescriptionException("DescricaoEmBrancoException");
+        }
+        if(buyPrice <= 0 || sellPrice <= 0 || quantity <= 0){
+            throw new InvalidValueException("ValorInvalidoException");
+        }
+
         boolean productExist = false;
         for (Product product : this.products){
             if(product.getName() == name){

@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8524fc2e-f89d-4d38-b2e8-e6e4846c23b4" name="Changes" comment="Adding usage example in main.">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStockServices.java" afterDir="false" />
+    <list default="true" id="8524fc2e-f89d-4d38-b2e8-e6e4846c23b4" name="Changes" comment="Modifying usage example in main.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/tppe/TestStock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/tppe/TestStockServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStockServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,28 +28,29 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2YjcCFtKp35JlrDueXorfa3zU5r" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/daniel/Desktop/Target/bipttex&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.tppe.services" />
@@ -128,7 +128,39 @@
       <option name="project" value="LOCAL" />
       <updated>1701053770431</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Adding Junit to project.">
+      <option name="closed" value="true" />
+      <created>1701091214380</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701091214380</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Changing exception flux.">
+      <option name="closed" value="true" />
+      <created>1701091232565</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701091232565</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Adding test cases to Product.">
+      <option name="closed" value="true" />
+      <created>1701091250023</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1701091250023</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Modifying usage example in main.">
+      <option name="closed" value="true" />
+      <created>1701091286678</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1701091286678</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -142,6 +174,10 @@
     <MESSAGE value="Adding stock class." />
     <MESSAGE value="Adding stock services class." />
     <MESSAGE value="Adding usage example in main." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding usage example in main." />
+    <MESSAGE value="Adding Junit to project." />
+    <MESSAGE value="Changing exception flux." />
+    <MESSAGE value="Adding test cases to Product." />
+    <MESSAGE value="Modifying usage example in main." />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifying usage example in main." />
   </component>
 </project>
