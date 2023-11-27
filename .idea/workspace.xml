@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8524fc2e-f89d-4d38-b2e8-e6e4846c23b4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tppe/exceptions/BlankDescriptionException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" afterDir="false" />
+    <list default="true" id="8524fc2e-f89d-4d38-b2e8-e6e4846c23b4" name="Changes" comment="Adding usage example in main.">
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStockServices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/exceptions/InvalidValueException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/exceptions/InvalidValueException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/services/AddProduct.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +39,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -48,6 +51,26 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.tppe.services" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="All in inventoryControl" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="inventoryControl" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in inventoryControl" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,10 +80,68 @@
       <option name="presentableId" value="Default" />
       <updated>1701042301986</updated>
     </task>
+    <task id="LOCAL-00001" summary="Removing unnecessary class.">
+      <option name="closed" value="true" />
+      <created>1701053666279</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701053666279</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Adding BlankDescriptionException and InvalidValueException.">
+      <option name="closed" value="true" />
+      <created>1701053718225</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701053718225</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adding product class.">
+      <option name="closed" value="true" />
+      <created>1701053733734</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701053733734</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adding stock class.">
+      <option name="closed" value="true" />
+      <created>1701053740960</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701053740960</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adding stock services class.">
+      <option name="closed" value="true" />
+      <created>1701053754805</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1701053754805</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Adding usage example in main.">
+      <option name="closed" value="true" />
+      <created>1701053770431</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701053770431</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnknownFeatures">
     <option featureType="dependencySupport" implementationName="executable:docker" />
     <option featureType="dependencySupport" implementationName="executable:kubectl" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Removing unnecessary class." />
+    <MESSAGE value="Adding BlankDescriptionException and InvalidValueException." />
+    <MESSAGE value="Adding product class." />
+    <MESSAGE value="Adding stock class." />
+    <MESSAGE value="Adding stock services class." />
+    <MESSAGE value="Adding usage example in main." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding usage example in main." />
   </component>
 </project>
