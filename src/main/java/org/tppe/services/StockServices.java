@@ -2,6 +2,8 @@ package org.tppe.services;
 
 import org.tppe.entities.Product;
 import org.tppe.entities.Stock;
+import org.tppe.exceptions.BlankDescriptionException;
+import org.tppe.exceptions.InvalidValueException;
 
 public class StockServices {
     private Stock stock;
@@ -27,8 +29,15 @@ public class StockServices {
         return null;
     }
 
-    public void receiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity){
-       this.stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
+    public void receiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity) throws BlankDescriptionException, InvalidValueException {
+        if(name == null || barcode == null || name.isBlank() || barcode.isBlank()){
+            throw new BlankDescriptionException("DescricaoEmBrancoException");
+        }
+        if(buyPrice <= 0 || sellPrice <= 0 || quantity <= 0){
+            throw new InvalidValueException("ValorInvalidoException");
+        }
+
+        this.stock.addProduct(name, barcode, buyPrice, sellPrice, quantity);
     }
 
     public void sellProduct(){

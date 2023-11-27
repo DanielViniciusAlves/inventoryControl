@@ -10,14 +10,7 @@ public class Product {
     private double sellPrice;
     private int quantity;
 
-    public Product(String name, String barcode, double buyPrice, double sellPrice, int quantity) throws InvalidValueException, BlankDescriptionException {
-        if(name == null || barcode == null || name.isBlank() || barcode.isBlank()){
-            throw new BlankDescriptionException("DescricaoEmBrancoException");
-        }
-        if(buyPrice <= 0 || sellPrice <= 0 || quantity <= 0){
-            throw new InvalidValueException("ValorInvalidoException");
-        }
-
+    public Product(String name, String barcode, double buyPrice, double sellPrice, int quantity) {
         this.name = name;
         this.barcode = barcode;
         this.buyPrice = buyPrice;

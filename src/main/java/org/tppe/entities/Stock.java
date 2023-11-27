@@ -18,22 +18,16 @@ public class Stock {
     }
 
     public void addProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity){
-        try {
-            boolean productExist = false;
-            for (Product product : this.products){
-                if(product.getName() == name){
-                    product.setQuantity(product.getQuantity() + quantity);
-                    productExist = true;
-                }
+        boolean productExist = false;
+        for (Product product : this.products){
+            if(product.getName() == name){
+                product.setQuantity(product.getQuantity() + quantity);
+                productExist = true;
             }
-            if(!productExist){
-                Product product = new Product(name, barcode, buyPrice, sellPrice, quantity);
-                this.products.add(product);
-            }
-        } catch (InvalidValueException e) {
-            throw new RuntimeException(e);
-        } catch (BlankDescriptionException e) {
-            throw new RuntimeException(e);
+        }
+        if(!productExist){
+            Product product = new Product(name, barcode, buyPrice, sellPrice, quantity);
+            this.products.add(product);
         }
     }
 
