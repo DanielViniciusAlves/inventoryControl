@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8524fc2e-f89d-4d38-b2e8-e6e4846c23b4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tppe/exceptions/BlankDescriptionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/exceptions/InvalidValueException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/exceptions/InvalidValueException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/services/AddProduct.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +42,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
