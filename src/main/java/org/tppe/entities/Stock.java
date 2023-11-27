@@ -49,7 +49,6 @@ public class Stock {
         Batch batch = new Batch(this.batchId, name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         this.batches.add(batch);
         this.batchId++;
-        this.checkBatchDateExpiration();
     }
 
     public void removeProduct(Product product, int quantity, int batchId){
@@ -61,16 +60,6 @@ public class Stock {
         for (Batch tempBatch : this.batches){
             if(tempBatch.getBatchId() == batchId){
                 tempBatch.setBatchQuantity(tempBatch.getBatchQuantity() - quantity);
-            }
-        }
-        this.checkBatchDateExpiration();
-    }
-
-    private void checkBatchDateExpiration(){
-        for(Batch tempBatch : this.batches){
-            if(30 >= (ChronoUnit.DAYS.between(LocalDate.now(), tempBatch.getExpirationDate()))){
-                tempBatch.setBuyPrice(tempBatch.getBuyPrice() * 0.8);
-                System.out.println("Produto perto da data de validade, preço reduzido.");
             }
         }
     }

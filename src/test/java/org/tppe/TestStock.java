@@ -92,30 +92,4 @@ public class TestStock {
             stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
     }
-
-    @ParameterizedTest
-    @CsvSource({
-            "ProductA, 123, 10.0, 20.0, 100, 2023-11-27",
-    })
-    public void testExpirationDateExpired(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
-        assertDoesNotThrow(() -> {
-            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
-        });
-
-        Batch addedBatch = stock.getBatches().getFirst();
-        assertEquals(buyPrice * 0.8, addedBatch.getBuyPrice());
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            "ProductA, 123, 10.0, 20.0, 100",
-    })
-    public void testExpirationDate(String name, String barcode, double buyPrice, double sellPrice, int quantity) {
-        assertDoesNotThrow(() -> {
-            stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, LocalDate.now().plusDays(31));
-        });
-
-        Batch addedBatch = stock.getBatches().getFirst();
-        assertEquals(buyPrice, addedBatch.getBuyPrice());
-    }
 }
