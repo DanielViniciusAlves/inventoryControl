@@ -10,8 +10,8 @@ import org.tppe.services.StockServices;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestStockServices {
 
@@ -59,5 +59,20 @@ public class TestStockServices {
         Product foundProduct = stockServices.findProductByBarcode(barcode);
 
         assertEquals(barcode, foundProduct.getBarcode());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "ProductF, 123, 15.0, 25.0, 150, 2023-12-31"
+    })
+    public void testReturnProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
+        stockServices.receiveProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
+
+        Product returnedProduct = stockServices.findProductByBarcode(barcode);
+        int initialQuantity = returnedProduct.getQuantity();
+        int quantityToReturn = 50;
+        stockServices.returnProduct(name, quantityToReturn);
+
+        assertEquals(initialQuantity - quantityToReturn, returnedProduct.getQuantity());
     }
 }

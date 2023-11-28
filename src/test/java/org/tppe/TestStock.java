@@ -36,18 +36,18 @@ public class TestStock {
             stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
 
-        Product addedProduct = stock.getProducts().getFirst();
+        Product addedProduct = stock.getProducts().get(0);
         assertEquals(name, addedProduct.getName());
 
-        Batch addedBatch = stock.getBatches().getFirst();
+        Batch addedBatch = stock.getBatches().get(0);
         assertEquals(name, addedBatch.getProductName());
 
         assertDoesNotThrow(() -> {
             stock.addProduct(name, barcode, buyPrice, sellPrice, 50, expirationDate);
         });
 
-        addedProduct = stock.getProducts().getFirst();
-        addedBatch = stock.getBatches().getFirst();
+        addedProduct = stock.getProducts().get(0);
+        addedBatch = stock.getBatches().get(0);
 
         assertEquals(quantity + 50, addedProduct.getQuantity());
         assertEquals(quantity, addedBatch.getBatchQuantity());
@@ -61,10 +61,10 @@ public class TestStock {
         assertDoesNotThrow(() -> {
             stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
-        Product addedProduct = stock.getProducts().getFirst();
+        Product addedProduct = stock.getProducts().get(0);
         stock.removeProduct(addedProduct, 10, 0);
 
-        Batch addedBatch = stock.getBatches().getFirst();
+        Batch addedBatch = stock.getBatches().get(0);
 
         assertEquals(quantity - 10, addedProduct.getQuantity());
         assertEquals(quantity - 10, addedBatch.getBatchQuantity());
@@ -104,7 +104,7 @@ public class TestStock {
 
         stock.ExpirationDate();
 
-        Batch addedBatch = stock.getBatches().getFirst();
+        Batch addedBatch = stock.getBatches().get(0);
         assertEquals(buyPrice * 0.8, addedBatch.getBuyPrice());
     }
 
@@ -119,7 +119,7 @@ public class TestStock {
 
         stock.ExpirationDate();
 
-        Batch addedBatch = stock.getBatches().getFirst();
+        Batch addedBatch = stock.getBatches().get(0);
         assertEquals(buyPrice, addedBatch.getBuyPrice());
     }
 
@@ -134,7 +134,7 @@ public class TestStock {
 
         stock.ExpirationDate();
 
-        Batch addedBatch = stock.getBatches().getFirst();
+        Batch addedBatch = stock.getBatches().get(0);
         assertEquals(buyPrice, addedBatch.getBuyPrice());
     }
 }
