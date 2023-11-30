@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8524fc2e-f89d-4d38-b2e8-e6e4846c23b4" name="Changes" comment="Modifying tests to add product.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Batch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/tppe/TestStock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/tppe/TestStockServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStockServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,10 +41,18 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/daniel/Desktop/Target/bipttex&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ugor_/OneDrive/Documentos/TecProg/inventoryControl&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -57,7 +60,7 @@
       <recent name="org.tppe.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in inventoryControl">
+  <component name="RunManager" selected="JUnit.TestStockServices">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.tppe.App" />
       <module name="inventoryControl" />
@@ -74,6 +77,8 @@
     <configuration name="All in inventoryControl" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="inventoryControl" />
       <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -94,6 +99,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestStockServices" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="inventoryControl" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tppe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="PACKAGE_NAME" value="org.tppe" />
+      <option name="MAIN_CLASS_NAME" value="org.tppe.TestStockServices" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="org.tppe in inventoryControl" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="inventoryControl" />
       <extension name="coverage">
@@ -108,11 +131,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="JUnit.All in inventoryControl" />
+      <item itemvalue="JUnit.org.tppe in inventoryControl" />
+      <item itemvalue="JUnit.TestStock" />
+      <item itemvalue="JUnit.TestStockServices" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestStockServices" />
+        <item itemvalue="JUnit.TestStock" />
         <item itemvalue="JUnit.All in inventoryControl" />
         <item itemvalue="Application.App" />
-        <item itemvalue="JUnit.TestStock" />
         <item itemvalue="JUnit.org.tppe in inventoryControl" />
       </list>
     </recent_temporary>
@@ -125,6 +156,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1701042301986</updated>
+      <workItem from="1701368074184" duration="558000" />
+      <workItem from="1701369090076" duration="518000" />
     </task>
     <task id="LOCAL-00001" summary="Removing unnecessary class.">
       <option name="closed" value="true" />
@@ -217,6 +250,9 @@
     <option name="localTasksCounter" value="12" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="UnknownFeatures">
     <option featureType="dependencySupport" implementationName="executable:docker" />
     <option featureType="dependencySupport" implementationName="executable:kubectl" />
@@ -234,5 +270,9 @@
     <MESSAGE value="Modifying usage example in main." />
     <MESSAGE value="Modifying tests to add product." />
     <option name="LAST_COMMIT_MESSAGE" value="Modifying tests to add product." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
