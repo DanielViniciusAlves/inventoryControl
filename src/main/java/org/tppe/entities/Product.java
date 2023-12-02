@@ -7,11 +7,16 @@ public class Product {
     private String name;
     private String barcode;
     private int quantity;
+    private int minimumLimit;
+    private String supplier;
+    
 
     public Product(String name, String barcode, int quantity) {
         this.name = name;
         this.barcode = barcode;
         this.quantity = quantity;
+        this.supplier = supplier;
+        
     }
 
     public String getName() {
@@ -36,5 +41,17 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public void setMinimumLimit(int minimumLimit) {
+        this.minimumLimit = minimumLimit;
+    }
+
+    public int getMinimumLimit() {
+        return minimumLimit;
+    }
+    
+    public String getSupplier() {
+        return supplier;
     }
 }
