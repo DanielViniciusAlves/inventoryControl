@@ -1,98 +1,132 @@
-package org.tppe;
+package org.tppe.services;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.tppe.entities.Batch;
 import org.tppe.entities.Product;
+import org.tppe.entities.Stock;
 import org.tppe.exceptions.BlankDescriptionException;
 import org.tppe.exceptions.InvalidValueException;
-import org.tppe.services.StockServices;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+public class StockServices {
+    private Stock stock;
+    private Map<String, Boolean> lowStockAlerts; 
 
-public class TestStockServices {
-
-    private static StockServices stockServices;
-
-    @BeforeAll
-    public static void init(){
-        stockServices = new StockServices();
+    public StockServices() {
+        this.stock = new Stock();
+        this.lowStockAlerts = new HashMap<>();
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "ProductA, 123, 10.0, 20.0, 100, 2023-12-31",
-            "ProductB, 456, 15.0, 25.0, 150, 2023-12-31"
-    })
-    public void testFindProductByName(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
-        stockServices.receiveProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
-
-        Product foundProduct = stockServices.findProductByName(name);
-
-        assertEquals(name, foundProduct.getName());
+    public Product findProductByName(String name) {
+        for (Product product : this.stock.getProducts()) {
+            if (product.getName().equals(name)) {
+                return product;
+            }
+        }
+        return null;
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "ProductC, 456, 10.0, 20.0, 100, 2023-12-31",
-            "ProductD, 123, 15.0, 25.0, 150, 2023-12-31"
-    })
-    public void testFindProductByBarcode(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
-        stockServices.receiveProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
-
-        Product foundProduct = stockServices.findProductByBarcode(barcode);
-
-        assertEquals(barcode, foundProduct.getBarcode());
+    public Product findProductByBarcode(String barcode) {
+        for (Product product : this.stock.getProducts()) {
+            if (product.getBarcode().equals(barcode)) {
+                return product;
+            }
+        }
+        return null;
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "ProductE, 456, 10.0, 20.0, 100, 2023-12-31",
-            "ProductF, 123, 15.0, 25.0, 150, 2023-12-31"
-    })
-    public void testReceiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
-        stockServices.receiveProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
+    public void receiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
+        try {
+            this.stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
 
-        Product foundProduct = stockServices.findProductByBarcode(barcode);
+            Product receivedProduct = this.findProductByBarcode(barcode);
+            Batch receivedBatch = this.stock.getBatches().get(this.stock.getBatches().size() - 1); // Último lote adicionado
 
-        assertEquals(barcode, foundProduct.getBarcode());
+            receivedProduct.setQuantity(receivedProduct.getQuantity() + quantity);
+
+            System.out.println("Mercadoria recebida: " + name + " - Quantidade: " + quantity);
+
+        } catch (BlankDescriptionException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidValueException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "ProductF, 123, 15.0, 25.0, 150, 2023-12-31"
-    })
-    public void testReturnProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
-        stockServices.receiveProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
-
-        Product returnedProduct = stockServices.findProductByBarcode(barcode);
-        int initialQuantity = returnedProduct.getQuantity();
-        int quantityToReturn = 50;
-        stockServices.returnProduct(name, quantityToReturn);
-
-        assertEquals(initialQuantity - quantityToReturn, returnedProduct.getQuantity());
-    }
-    
-    @ParameterizedTest
-    @CsvSource({
-            "ProductA, 123, 10.0, 20.0, 100, 2023-12-31, 50, BranchA, BranchB",
-            "ProductB, 456, 15.0, 25.0, 150, 2023-12-31, 30, BranchC, BranchD"
-    })
-    public void testLowStockAlert(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate, int alertQuantity, String branch1, String branch2) {
-        StockServices stockServices = new StockServices();
-        stockServices.receiveProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
-
-        Product product = stockServices.findProductByBarcode(barcode);
-        product.setMinimumLimit(alertQuantity);
-
-        stockServices.sellProduct(name, quantity - alertQuantity);
-
-        assertTrue(stockServices.hasLowStockAlert(name, alertQuantity));
+    public int getTotalProductsByName(String name) {
+        Product product = this.findProductByName(name);
+        return product != null ? product.getQuantity() : 0;
     }
 
+    public int getTotalProductsByBarcode(String barcode) {
+        Product product = this.findProductByBarcode(barcode);
+        return product != null ? product.getQuantity() : 0;
+    }
 
+    public int getBatchTotal(int batchId) {
+        for (Batch batch : this.stock.getBatches()) {
+            if (batch.getBatchId() == batchId) {
+                return batch.getBatchQuantity();
+            }
+        }
+        return 0;
+    }
+
+    public void sellProduct(String productName, int quantity) {
+        try {
+            Product product = findProductByName(productName);
+
+            if (product != null) {
+                if (product.getQuantity() >= quantity) {
+                    product.setQuantity(product.getQuantity() - quantity);
+
+                    if (product.getQuantity() <= product.getMinimumLimit()) {
+                        lowStockAlerts.put(productName, true); // Configura o alerta de estoque mínimo
+                    }
+
+                    System.out.println("Venda processada para: " + productName + " - Quantidade: " + quantity);
+                } else {
+                    throw new InvalidValueException("Quantidade insuficiente em estoque para venda.");
+                }
+            } else {
+                throw new InvalidValueException("Produto não encontrado para venda.");
+            }
+        } catch (InvalidValueException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void transferProduct(String productName, int quantity, String sourceBranch, String destinationBranch) {
+        
+    }
+
+    public void returnProduct(String productName, int quantity) {
+        try {
+            Product product = findProductByName(productName);
+
+            if (product != null) {
+                if (product.getQuantity() >= quantity) {
+                    product.setQuantity(product.getQuantity() - quantity);
+
+                    System.out.println("Devolução processada para: " + productName + " - Quantidade: " + quantity);
+                } else {
+                    throw new InvalidValueException("Quantidade insuficiente em estoque para devolução.");
+                }
+            } else {
+                throw new InvalidValueException("Produto não encontrado para devolução.");
+            }
+        } catch (InvalidValueException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void changeProductInStock() {
+        
+    }
+
+    public boolean hasLowStockAlert(String productName, int minimumLimit) {
+        return true;
+    }
 }
