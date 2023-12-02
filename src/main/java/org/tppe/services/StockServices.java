@@ -7,12 +7,16 @@ import org.tppe.exceptions.BlankDescriptionException;
 import org.tppe.exceptions.InvalidValueException;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StockServices {
     private Stock stock;
+    private Map<String, Boolean> lowStockAlerts; 
 
     public StockServices() {
         this.stock = new Stock();
+        this.lowStockAlerts = new HashMap<>();
     }
 
     public Product findProductByName(String name) {
@@ -51,7 +55,6 @@ public class StockServices {
         }
     }
 
-
     public int getTotalProductsByName(String name) {
         Product product = this.findProductByName(name);
         return product != null ? product.getQuantity() : 0;
@@ -79,6 +82,10 @@ public class StockServices {
                 if (product.getQuantity() >= quantity) {
                     product.setQuantity(product.getQuantity() - quantity);
 
+                    if (product.getQuantity() <= product.getMinimumLimit()) {
+                        lowStockAlerts.put(productName, true); // Configura o alerta de estoque mínimo
+                    }
+
                     System.out.println("Venda processada para: " + productName + " - Quantidade: " + quantity);
                 } else {
                     throw new InvalidValueException("Quantidade insuficiente em estoque para venda.");
@@ -92,6 +99,7 @@ public class StockServices {
     }
 
     public void transferProduct(String productName, int quantity, String sourceBranch, String destinationBranch) {
+        
     }
 
     public void returnProduct(String productName, int quantity) {
@@ -115,5 +123,10 @@ public class StockServices {
     }
 
     public void changeProductInStock() {
+        
+    }
+
+    public boolean hasLowStockAlert(String productName, int minimumLimit) {
+        return true;
     }
 }

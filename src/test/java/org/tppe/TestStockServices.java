@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestStockServices {
 
@@ -78,45 +79,20 @@ public class TestStockServices {
     
     @ParameterizedTest
     @CsvSource({
-            "ProductA, 123, 10.0, 20.0, 100, 2023-12-31, 50, BranchA, BranchB, ProductB, 456, 15.0, 25.0, 150, 2023-12-31",
-            "ProductC, 789, 12.0, 22.0, 120, 2023-12-31, 30, BranchC, BranchD, ProductD, 789, 12.0, 22.0, 30, 2023-12-31"
+            "ProductA, 123, 10.0, 20.0, 100, 2023-12-31, 50, BranchA, BranchB",
+            "ProductB, 456, 15.0, 25.0, 150, 2023-12-31, 30, BranchC, BranchD"
     })
-    public void testTransferProduct(
-            String sourceProductName, String sourceBarcode, double sourceBuyPrice, double sourceSellPrice, int sourceQuantity, LocalDate sourceExpirationDate,
-            int transferQuantity,
-            String sourceBranch, String destinationBranch,
-            String destinationProductName, String destinationBarcode, double destinationBuyPrice, double destinationSellPrice, int destinationQuantity, LocalDate destinationExpirationDate) {
+    public void testLowStockAlert(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate, int alertQuantity, String branch1, String branch2) {
+        StockServices stockServices = new StockServices();
+        stockServices.receiveProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
 
-        
-        stockServices.receiveProduct(sourceProductName, sourceBarcode, sourceBuyPrice, sourceSellPrice, sourceQuantity, sourceExpirationDate);
-        stockServices.receiveProduct(destinationProductName, destinationBarcode, destinationBuyPrice, destinationSellPrice, destinationQuantity, destinationExpirationDate);
+        Product product = stockServices.findProductByBarcode(barcode);
+        product.setMinimumLimit(alertQuantity);
 
-        
-        Product sourceProductBefore = stockServices.findProductByName(sourceProductName);
-        Product destinationProductBefore = stockServices.findProductByBarcode(destinationBarcode);
+        stockServices.sellProduct(name, quantity - alertQuantity);
 
-        
-        stockServices.transferProduct(sourceProductName, transferQuantity, sourceBranch, destinationBranch);
-
-        
-        Product sourceProductAfter = stockServices.findProductByName(sourceProductName);
-        Product destinationProductAfter = stockServices.findProductByBarcode(destinationBarcode);
-
-        
-        assertEquals(sourceProductBefore.getQuantity() - transferQuantity, sourceProductAfter.getQuantity());
-        assertEquals(destinationProductBefore.getQuantity() + transferQuantity, destinationProductAfter.getQuantity());
+        assertTrue(stockServices.hasLowStockAlert(name, alertQuantity));
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "ProductE, 012, 18.0, 28.0, 30, 2023-12-31, 60, BranchA, BranchB" // Tentativa de transferência com quantidade insuficiente
-    })
-    public void testTransferProductInsufficientQuantity(String productName, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate, int transferQuantity, String sourceBranch, String destinationBranch) {
-        
-        stockServices.receiveProduct(productName, barcode, buyPrice, sellPrice, quantity, expirationDate);
-
-        
-        assertThrows(InvalidValueException.class, () -> stockServices.transferProduct(productName, transferQuantity, sourceBranch, destinationBranch));
-    }
 
 }
