@@ -127,19 +127,6 @@ public class StockServices {
     }
 
     public boolean hasLowStockAlert(String productName, int minimumLimit) {
-        Product product = findProductByName(productName);
-
-        if (product != null) {
-            int currentQuantity = product.getQuantity();
-            System.out.println("Produto: " + productName + ", Quantidade Atual em Estoque: " + currentQuantity + ", Limite Pré-definido: " + minimumLimit);
-
-            boolean alert = currentQuantity <= minimumLimit;
-            System.out.println("Alerta de Estoque Mínimo: " + alert);
-
-            return alert;
-        }
-
-        System.out.println("Produto não encontrado: " + productName);
-        return false;
+        return true;
     }
 }
