@@ -26,7 +26,19 @@ public class Stock {
     public List<Batch> getBatches() {
         return batches;
     }
-
+    
+    public Product findProductByName(String name) {
+        for (Product product : this.getProducts()) {
+            if (product.getName().equals(name)) {
+                return product;
+            }
+        }
+        return null;
+    }
+    
+    public void changeProductInStock(Product product,int quantity) {
+    }
+    
     public void addProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) throws BlankDescriptionException, InvalidValueException {
         if(name == null || barcode == null || name.isBlank() || barcode.isBlank()){
             throw new BlankDescriptionException("DescricaoEmBrancoException");
@@ -38,7 +50,7 @@ public class Stock {
         boolean productExist = false;
         for (Product product : this.products){
             if(product.getName() == name){
-                product.setQuantity(product.getQuantity() + quantity);
+                product.changeProductInStock(product.getQuantity() + quantity);
                 productExist = true;
             }
         }
@@ -54,7 +66,7 @@ public class Stock {
     public void removeProduct(Product product, int quantity, int batchId){
         for (Product tempProduct : this.products){
             if(product.getName() == tempProduct.getName()){
-                product.setQuantity(product.getQuantity() - quantity);
+                product.changeProductInStock(product.getQuantity() - quantity);
             }
         }
         for (Batch tempBatch : this.batches){
