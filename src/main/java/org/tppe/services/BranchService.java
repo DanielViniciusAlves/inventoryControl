@@ -9,27 +9,25 @@ public class BranchService
 	private List<Branch> branchList;
 	
 	public BranchService() {
-		
+		this.branchList = new ArrayList<>();
 	}
 	
 	public List<Branch> getBranchList() {
 		return branchList;
 	}
 
-	public void setBranchList(List<Branch> branchList) {
-		this.branchList = branchList;
-	}
-
-	public void addBranch(String branchName, Stock stock) throws BlankDescriptionException {
+	public Branch addBranch(String branchName, StockServices stockServices) throws BlankDescriptionException {
 		if(branchName.length() == 0) {
 			throw new BlankDescriptionException(branchName);
 		}
-		this.branchList.add(new Branch(branchName,stock));
+		Branch newBranch = new Branch(branchName,stockServices,stockServices.getStock());
+		this.branchList.add(newBranch);
+		return newBranch;
 	}
 	public Branch findBranch(String branchName) 
 	{
-		for(Branch b :this.branchList) {
-			if(b.getName() == branchName) {
+		for(Branch b : this.branchList) {
+			if(b.getName().equals(branchName)) {
 				return b;
 			}
 		}

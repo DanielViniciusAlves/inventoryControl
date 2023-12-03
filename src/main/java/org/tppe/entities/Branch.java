@@ -1,12 +1,17 @@
 package org.tppe.entities;
 
+import org.tppe.services.StockServices;
+
 public class Branch {
 	private String name;
+	private StockServices stockServices;
+
 	private Stock stock;
-	
-	public Branch(String name,Stock stock) {
+
+	public Branch(String name, StockServices stockServices, Stock stock) {
 		super();
 		this.name = name;
+		this.stockServices = stockServices;
 		this.stock = stock;
 	}
 
@@ -14,18 +19,13 @@ public class Branch {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+	public StockServices getStockServices() {
+		return stockServices;
 	}
 
 	public Stock getStock() {
 		return stock;
 	}
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
-	
-	
 
 }

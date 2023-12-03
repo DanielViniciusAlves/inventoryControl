@@ -11,6 +11,7 @@ public class Batch {
     private double buyPrice;
     private double sellPrice;
     private int batchQuantity;
+    private boolean expired;
 
     private LocalDate expirationDate;
 
@@ -22,6 +23,7 @@ public class Batch {
         this.sellPrice = sellPrice;
         this.batchQuantity = batchQuantity;
         this.expirationDate = expirationDate;
+        this.expired = false;
     }
 
     public int getBatchId() {
@@ -71,5 +73,13 @@ public class Batch {
 
     public LocalDate getExpirationDate() {
         return expirationDate;
+    }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expiration) {
+        this.expired = expiration;
     }
 }

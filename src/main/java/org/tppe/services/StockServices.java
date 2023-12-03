@@ -40,12 +40,6 @@ public class StockServices {
     public void receiveProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) {
         try {
             this.stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
-
-            Product receivedProduct = this.findProductByBarcode(barcode);
-            Batch receivedBatch = this.stock.getBatches().get(this.stock.getBatches().size() - 1); // Último lote adicionado
-
-            receivedProduct.changeProductInStock(receivedProduct.getQuantity() + quantity);
-
             System.out.println("Mercadoria recebida: " + name + " - Quantidade: " + quantity);
 
         } catch (BlankDescriptionException e) {
@@ -77,11 +71,9 @@ public class StockServices {
     public void sellProduct(String productName, int quantity) {
         try {
             Product product = findProductByName(productName);
-
-            if (product != null) {
+            if (!product.equals(null)) {
                 if (product.getQuantity() >= quantity) {
                     product.changeProductInStock(product.getQuantity() - quantity);
-
                     if (product.getQuantity() <= product.getMinimumLimit()) {
                         lowStockAlerts.put(productName, true); // Configura o alerta de estoque mínimo
                     }
@@ -107,21 +99,21 @@ public class StockServices {
     	}
     	return null;
     }
-    public void transferProduct(List<Branch> branches, String productName, int quantity, String sourceBranch, String destinationBranch) throws BlankDescriptionException, InvalidValueException {
+    public void transferProduct(BranchService branchService, String productName, int quantity, String sourceBranch, String destinationBranch) throws BlankDescriptionException, InvalidValueException {
   
-    	Branch to = this.findBranch(branches, destinationBranch);
+    	Branch to = branchService.findBranch(destinationBranch);
     	if(to == null) {
-    		System.out.println("A branch "+sourceBranch+" não existe .");
-    		return;
-    	}
-    	
-    	Branch from = this.findBranch(branches, destinationBranch);
-    	if(from == null) {
     		System.out.println("A branch "+destinationBranch+" não existe .");
     		return;
     	}
-    	
-    	Product product = findProductByName(productName);
+
+    	Branch from = branchService.findBranch(sourceBranch);
+    	if(from == null) {
+    		System.out.println("A branch "+sourceBranch+" não existe .");
+    		return;
+    	}
+
+    	Product product = branchService.findBranch(sourceBranch).getStockServices().findProductByName(productName);
     	if(product == null) {
     		System.out.println("O produto "+productName+" não existe .");
     		return;
@@ -139,7 +131,7 @@ public class StockServices {
     	Batch b = null;
     	for(Batch t : sourceStock.getBatches())
     	{
-    		if(t.getProductName() == productName)
+    		if(t.getProductName().equals(productName))
     			b = t;
     	}
     	to.getStock().addProduct(productName, product.getBarcode(),b.getBuyPrice(),b.getSellPrice() , quantity, b.getExpirationDate());
@@ -186,5 +178,8 @@ public class StockServices {
         boolean alert = currentQuantity <= minimumLimit;
         System.out.println("Alerta de Estoque Mínimo: " + alert);
         return alert;
+    }
+    public Stock getStock() {
+        return stock;
     }
 }

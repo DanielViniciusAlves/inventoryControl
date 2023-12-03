@@ -37,6 +37,7 @@ public class Stock {
     }
     
     public void changeProductInStock(Product product,int quantity) {
+        product.changeProductInStock(quantity);
     }
     
     public void addProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) throws BlankDescriptionException, InvalidValueException {
@@ -61,6 +62,7 @@ public class Stock {
         Batch batch = new Batch(this.batchId, name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         this.batches.add(batch);
         this.batchId++;
+        expirationDate();
     }
 
     public void removeProduct(Product product, int quantity, int batchId){
@@ -74,14 +76,16 @@ public class Stock {
                 tempBatch.setBatchQuantity(tempBatch.getBatchQuantity() - quantity);
             }
         }
+        expirationDate();
     }
 
-    public void ExpirationDate(){
+    public void expirationDate(){
         for (Batch batch : this.batches){
             if(batch.getExpirationDate() != null){
-                if(7 >= (ChronoUnit.DAYS.between(LocalDate.now(), batch.getExpirationDate()))){
+                if(7 >= (ChronoUnit.DAYS.between(LocalDate.now(), batch.getExpirationDate())) && !batch.isExpired()){
                     double newPrice = batch.getBuyPrice() * 0.8;
                     batch.setBuyPrice(newPrice);
+                    batch.setExpired(true);
                 }
             }
         }

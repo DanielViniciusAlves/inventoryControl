@@ -47,6 +47,7 @@ public class Product {
     }
 
     public void changeProductInStock(int quantity) {
+        System.out.println("Test");
         this.quantity = quantity;
     }
 
