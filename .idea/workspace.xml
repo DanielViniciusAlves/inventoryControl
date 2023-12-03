@@ -4,18 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8524fc2e-f89d-4d38-b2e8-e6e4846c23b4" name="Changes" comment="Adding main menu in App.">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestBranchServices.java" afterDir="false" />
+    <list default="true" id="8524fc2e-f89d-4d38-b2e8-e6e4846c23b4" name="Changes" comment="Adding granches to project.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tppe/exceptions/EstoqueNegativoException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Batch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Batch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Branch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Branch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/entities/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/services/BranchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/services/BranchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tppe/services/StockServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/tppe/TestBranchServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestBranchServices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/tppe/TestStock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/tppe/TestStockServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/tppe/TestStockServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +69,7 @@
       <recent name="org.tppe.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestStock">
+  <component name="RunManager" selected="JUnit.All in inventoryControl">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.tppe.App" />
       <module name="inventoryControl" />
@@ -81,6 +79,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in inventoryControl" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="inventoryControl" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -115,24 +121,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestStockServices" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="inventoryControl" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.tppe.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="21" />
-      <option name="PACKAGE_NAME" value="org.tppe" />
-      <option name="MAIN_CLASS_NAME" value="org.tppe.TestStockServices" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="org.tppe in inventoryControl" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="inventoryControl" />
       <extension name="coverage">
@@ -150,17 +138,17 @@
     <list>
       <item itemvalue="Application.App" />
       <item itemvalue="JUnit.TestBranchServices" />
+      <item itemvalue="JUnit.All in inventoryControl" />
       <item itemvalue="JUnit.org.tppe in inventoryControl" />
       <item itemvalue="JUnit.TestStock" />
-      <item itemvalue="JUnit.TestStockServices" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestStock" />
-        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.All in inventoryControl" />
         <item itemvalue="JUnit.org.tppe in inventoryControl" />
+        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.TestStock" />
         <item itemvalue="JUnit.TestBranchServices" />
-        <item itemvalue="JUnit.TestStockServices" />
       </list>
     </recent_temporary>
   </component>
@@ -271,7 +259,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701610760807</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixing tests.">
+      <option name="closed" value="true" />
+      <created>1701643575202</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701643575202</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Adding granches to project.">
+      <option name="closed" value="true" />
+      <created>1701643600699</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1701643600699</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +298,9 @@
     <MESSAGE value="Modifying usage example in main." />
     <MESSAGE value="Modifying tests to add product." />
     <MESSAGE value="Adding main menu in App." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding main menu in App." />
+    <MESSAGE value="Fixing tests." />
+    <MESSAGE value="Adding granches to project." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding granches to project." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

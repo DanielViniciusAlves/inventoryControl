@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.tppe.entities.Branch;
 import org.tppe.entities.Product;
 import org.tppe.exceptions.BlankDescriptionException;
+import org.tppe.exceptions.EstoqueNegativoException;
 import org.tppe.exceptions.InvalidValueException;
 import org.tppe.services.BranchService;
 import org.tppe.services.StockServices;
@@ -41,7 +42,7 @@ public class TestBranchServices {
     @CsvSource({
             "BranchA, BranchB, 100, productA",
     })
-    public void testTransferProduct(String destination, String source, int quantity, String productName) throws BlankDescriptionException, InvalidValueException {
+    public void testTransferProduct(String destination, String source, int quantity, String productName) throws BlankDescriptionException, InvalidValueException, EstoqueNegativoException {
         branchService.addBranch(destination, new StockServices());
         Branch branch = branchService.addBranch(source, new StockServices());
 

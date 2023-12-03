@@ -1,6 +1,7 @@
 package org.tppe.entities;
 
 import org.tppe.exceptions.BlankDescriptionException;
+import org.tppe.exceptions.EstoqueNegativoException;
 import org.tppe.exceptions.InvalidValueException;
 
 public class Product {
@@ -46,9 +47,13 @@ public class Product {
         return quantity;
     }
 
-    public void changeProductInStock(int quantity) {
-        System.out.println("Test");
-        this.quantity = quantity;
+    public void changeProductInStock(int quantity) throws EstoqueNegativoException {
+        if(quantity<0){
+            this.quantity = 0;
+            throw new EstoqueNegativoException("EstoqueNegativoException");
+        } else{
+            this.quantity = quantity;
+        }
     }
 
     public void setMinimumLimit(int minimumLimit) {

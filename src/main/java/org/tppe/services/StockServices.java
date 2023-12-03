@@ -2,6 +2,7 @@ package org.tppe.services;
 
 import org.tppe.entities.*;
 import org.tppe.exceptions.BlankDescriptionException;
+import org.tppe.exceptions.EstoqueNegativoException;
 import org.tppe.exceptions.InvalidValueException;
 
 import java.time.LocalDate;
@@ -46,6 +47,8 @@ public class StockServices {
             throw new RuntimeException(e);
         } catch (InvalidValueException e) {
             throw new RuntimeException(e);
+        } catch (EstoqueNegativoException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -87,6 +90,8 @@ public class StockServices {
             }
         } catch (InvalidValueException e) {
             throw new RuntimeException(e);
+        } catch (EstoqueNegativoException e) {
+            throw new RuntimeException(e);
         }
     }
     
@@ -99,7 +104,7 @@ public class StockServices {
     	}
     	return null;
     }
-    public void transferProduct(BranchService branchService, String productName, int quantity, String sourceBranch, String destinationBranch) throws BlankDescriptionException, InvalidValueException {
+    public void transferProduct(BranchService branchService, String productName, int quantity, String sourceBranch, String destinationBranch) throws BlankDescriptionException, EstoqueNegativoException, InvalidValueException {
   
     	Branch to = branchService.findBranch(destinationBranch);
     	if(to == null) {
@@ -154,6 +159,8 @@ public class StockServices {
                 throw new InvalidValueException("Produto não encontrado para devolução.");
             }
         } catch (InvalidValueException e) {
+            throw new RuntimeException(e);
+        } catch (EstoqueNegativoException e) {
             throw new RuntimeException(e);
         }
     }

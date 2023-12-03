@@ -4,6 +4,7 @@ import org.tppe.entities.Batch;
 import org.tppe.entities.Branch;
 import org.tppe.entities.Product;
 import org.tppe.exceptions.BlankDescriptionException;
+import org.tppe.exceptions.EstoqueNegativoException;
 import org.tppe.exceptions.InvalidValueException;
 import org.tppe.services.BranchService;
 import org.tppe.services.StockServices;
@@ -106,9 +107,7 @@ public class App {
                     String[] transferDetails = scanner.nextLine().split("\\s");
                     try {
                         defaultBranch.getStockServices().transferProduct(branchService, transferDetails[0], Integer.parseInt(transferDetails[1]), transferDetails[2], transferDetails[3]);
-                    } catch (BlankDescriptionException e) {
-                        throw new RuntimeException(e);
-                    } catch (InvalidValueException e) {
+                    } catch (BlankDescriptionException | InvalidValueException | EstoqueNegativoException e ) {
                         throw new RuntimeException(e);
                     }
                     break;

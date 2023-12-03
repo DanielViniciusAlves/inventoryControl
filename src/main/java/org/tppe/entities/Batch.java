@@ -1,5 +1,8 @@
 package org.tppe.entities;
 
+import org.tppe.exceptions.EstoqueNegativoException;
+import org.tppe.exceptions.InvalidValueException;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -66,8 +69,13 @@ public class Batch {
         return batchQuantity;
     }
 
-    public void setBatchQuantity(int batchQuantity) {
-        this.batchQuantity = batchQuantity;
+    public void setBatchQuantity(int batchQuantity) throws EstoqueNegativoException {
+        if(batchQuantity<0){
+            this.batchQuantity = 0;
+            throw new EstoqueNegativoException("EstoqueNegativoException");
+        } else{
+            this.batchQuantity = batchQuantity;
+        }
     }
 
 

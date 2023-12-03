@@ -62,7 +62,10 @@ public class TestStock {
             stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
         Product addedProduct = stock.getProducts().get(0);
-        stock.removeProduct(addedProduct, 10, 0);
+
+        assertDoesNotThrow(() -> {
+            stock.removeProduct(addedProduct, 10, 0);
+        });
 
         Batch addedBatch = stock.getBatches().get(0);
 

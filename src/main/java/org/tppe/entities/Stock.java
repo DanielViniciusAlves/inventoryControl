@@ -1,6 +1,7 @@
 package org.tppe.entities;
 
 import org.tppe.exceptions.BlankDescriptionException;
+import org.tppe.exceptions.EstoqueNegativoException;
 import org.tppe.exceptions.InvalidValueException;
 
 import java.time.LocalDate;
@@ -36,11 +37,11 @@ public class Stock {
         return null;
     }
     
-    public void changeProductInStock(Product product,int quantity) {
+    public void changeProductInStock(Product product,int quantity) throws EstoqueNegativoException {
         product.changeProductInStock(quantity);
     }
     
-    public void addProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) throws BlankDescriptionException, InvalidValueException {
+    public void addProduct(String name, String barcode, double buyPrice, double sellPrice, int quantity, LocalDate expirationDate) throws BlankDescriptionException, InvalidValueException, EstoqueNegativoException {
         if(name == null || barcode == null || name.isBlank() || barcode.isBlank()){
             throw new BlankDescriptionException("DescricaoEmBrancoException");
         }
@@ -65,7 +66,7 @@ public class Stock {
         expirationDate();
     }
 
-    public void removeProduct(Product product, int quantity, int batchId){
+    public void removeProduct(Product product, int quantity, int batchId) throws EstoqueNegativoException {
         for (Product tempProduct : this.products){
             if(product.getName() == tempProduct.getName()){
                 product.changeProductInStock(product.getQuantity() - quantity);
