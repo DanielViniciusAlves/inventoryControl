@@ -4,10 +4,10 @@ public class Branch {
 	private String name;
 	private Stock stock;
 	
-	public Branch(String name) {
+	public Branch(String name,Stock stock) {
 		super();
 		this.name = name;
-		this.stock = new Stock();
+		this.stock = stock;
 	}
 
 	public String getName() {
