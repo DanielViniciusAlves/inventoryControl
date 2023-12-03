@@ -102,7 +102,7 @@ public class TestStock {
             stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
 
-        stock.ExpirationDate();
+        stock.expirationDate();
 
         Batch addedBatch = stock.getBatches().get(0);
         assertEquals(buyPrice * 0.8, addedBatch.getBuyPrice());
@@ -117,7 +117,7 @@ public class TestStock {
             stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, LocalDate.now().plusDays(10));
         });
 
-        stock.ExpirationDate();
+        stock.expirationDate();
 
         Batch addedBatch = stock.getBatches().get(0);
         assertEquals(buyPrice, addedBatch.getBuyPrice());
@@ -132,7 +132,7 @@ public class TestStock {
             stock.addProduct(name, barcode, buyPrice, sellPrice, quantity, expirationDate);
         });
 
-        stock.ExpirationDate();
+        stock.expirationDate();
 
         Batch addedBatch = stock.getBatches().get(0);
         assertEquals(buyPrice, addedBatch.getBuyPrice());

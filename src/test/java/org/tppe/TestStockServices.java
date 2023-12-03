@@ -95,7 +95,7 @@ public class TestStockServices {
 
         System.out.println("Estoque Atual: " + product.getQuantity());
 
-        stockServices.sellProduct(name, quantity + alertQuantity);
+        stockServices.sellProduct(name, alertQuantity);
 
         System.out.println("Venda processada para: " + name + " - Quantidade: " + (quantity - alertQuantity));
         System.out.println("Estoque Atual: " + product.getQuantity());
