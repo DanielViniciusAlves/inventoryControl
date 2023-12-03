@@ -1,13 +1,12 @@
 package org.tppe.services;
 
-import org.tppe.entities.Batch;
-import org.tppe.entities.Product;
-import org.tppe.entities.Stock;
+import org.tppe.entities.*;
 import org.tppe.exceptions.BlankDescriptionException;
 import org.tppe.exceptions.InvalidValueException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StockServices {
@@ -44,7 +43,7 @@ public class StockServices {
             Product receivedProduct = this.findProductByBarcode(barcode);
             Batch receivedBatch = this.stock.getBatches().get(this.stock.getBatches().size() - 1); // Último lote adicionado
 
-            receivedProduct.setQuantity(receivedProduct.getQuantity() + quantity);
+            receivedProduct.changeProductInStock(receivedProduct.getQuantity() + quantity);
 
             System.out.println("Mercadoria recebida: " + name + " - Quantidade: " + quantity);
 
@@ -80,7 +79,7 @@ public class StockServices {
 
             if (product != null) {
                 if (product.getQuantity() >= quantity) {
-                    product.setQuantity(product.getQuantity() - quantity);
+                    product.changeProductInStock(product.getQuantity() - quantity);
 
                     if (product.getQuantity() <= product.getMinimumLimit()) {
                         lowStockAlerts.put(productName, true); // Configura o alerta de estoque mínimo
@@ -97,9 +96,53 @@ public class StockServices {
             throw new RuntimeException(e);
         }
     }
-
-    public void transferProduct(String productName, int quantity, String sourceBranch, String destinationBranch) {
-        
+    
+    public Branch findBranch(List<Branch> branches,String branchName)
+    {
+    	for( Branch branch : branches) {
+    		if(branch.getName() == branchName){
+    			return branch;
+    		}
+    	}
+    	return null;
+    }
+    public void transferProduct(List<Branch> branches, String productName, int quantity, String sourceBranch, String destinationBranch) throws BlankDescriptionException, InvalidValueException {
+  
+    	Branch to = this.findBranch(branches, destinationBranch);
+    	if(to == null) {
+    		System.out.println("A branch "+sourceBranch+" não existe .");
+    		return;
+    	}
+    	
+    	Branch from = this.findBranch(branches, destinationBranch);
+    	if(from == null) {
+    		System.out.println("A branch "+destinationBranch+" não existe .");
+    		return;
+    	}
+    	
+    	Product product = findProductByName(productName);
+    	if(product == null) {
+    		System.out.println("O produto "+productName+" não existe .");
+    		return;
+    	}
+    	if(product.getQuantity() < quantity ){
+    		System.out.println("A quantidade a ser transferida é maior que o estoque.");
+    		return;
+    	}
+    	int quantityInStock = product.getQuantity() - quantity;
+    	Stock sourceStock = from.getStock();
+    
+    	sourceStock.changeProductInStock(product, quantityInStock);
+    	product.changeProductInStock(quantityInStock);
+    	
+    	Batch b = null;
+    	for(Batch t : sourceStock.getBatches())
+    	{
+    		if(t.getProductName() == productName)
+    			b = t;
+    	}
+    	to.getStock().addProduct(productName, product.getBarcode(),b.getBuyPrice(),b.getSellPrice() , quantity, b.getExpirationDate());
+    	System.out.println("Foi transferido "+quantity+" unidades de "+productName+" de "+sourceBranch+" para "+destinationBranch);
     }
 
     public void returnProduct(String productName, int quantity) {
@@ -108,7 +151,7 @@ public class StockServices {
 
             if (product != null) {
                 if (product.getQuantity() >= quantity) {
-                    product.setQuantity(product.getQuantity() - quantity);
+                    product.changeProductInStock(product.getQuantity() - quantity);
 
                     System.out.println("Devolução processada para: " + productName + " - Quantidade: " + quantity);
                 } else {
@@ -122,9 +165,7 @@ public class StockServices {
         }
     }
 
-    public void changeProductInStock() {
-        
-    }
+   
 
     public boolean hasLowStockAlert(String productName, int minimumLimit) {
         Product product = findProductByName(productName);

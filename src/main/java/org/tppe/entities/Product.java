@@ -5,11 +5,11 @@ import org.tppe.exceptions.InvalidValueException;
 
 public class Product {
     private String name;
+    private String branch;
     private String barcode;
     private int quantity;
     private int minimumLimit;
     private String supplier;
-    
 
     public Product(String name, String barcode, int quantity) {
         this.name = name;
@@ -19,6 +19,13 @@ public class Product {
         
     }
 
+    public String getFilial() {
+        return this.branch;
+    }
+    public void setFilial(String filial) {
+        this.branch = filial;
+    }
+    
     public String getName() {
         return name;
     }
@@ -39,7 +46,7 @@ public class Product {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void changeProductInStock(int quantity) {
         this.quantity = quantity;
     }
 
