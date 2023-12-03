@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class StockServices {
     private Stock stock;
+
     private Map<String, Boolean> lowStockAlerts; 
 
     public StockServices() {
